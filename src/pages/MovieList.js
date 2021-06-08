@@ -9,14 +9,26 @@ class MovieList extends Component {
 
     this.state = {
       movies: [],
+      loading: true,
     };
   }
 
+  componentDidMount() {
+    this.listMovies();
+  }
+
+  async listMovies() {
+    const films = await movieAPI.getMovies();
+    this.setState({ movies: films, loading: false });
+  }
+
   render() {
-    const { movies } = this.state;
+    const { movies, loading } = this.state;
+    const loadingElement = <span>Carregando...</span>;
 
-    // Render Loading here if the request is still happening
-
+    if (loading === true) {
+      return <p>{ loadingElement }</p>;
+    }
     return (
       <div data-testid="movie-list">
         {movies.map((movie) => <MovieCard key={ movie.title } movie={ movie } />)}
