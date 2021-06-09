@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 class Loading extends Component {
   render() {
+    const loadingElement = <span>Carregando...</span>;
     return (
-      <div>Loading message</div>
+      <div>{ loadingElement }</div>
     );
   }
 }
