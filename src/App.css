@@ -2,6 +2,7 @@ body {
   background-color: #264653;
   box-sizing: border-box;
   font-size: 16px;
+  margin-left: 10px;
 }
 
 .page-title {
@@ -23,13 +24,17 @@ body {
   border-radius: 3px;
   display: inline-block;
   flex-direction: column;
-  height: 400px;
+  height: 430px;
   margin: 10px;
   overflow: hidden;
   width: 400px;
 }
 
 .movie-card-image {
+  width: 100%;
+}
+
+.movie-card-image-detail {
   width: 100%;
 }
 
@@ -54,4 +59,16 @@ body {
 .movie-card-storyline {
   font-size: 14px;
   text-align: justify;
+}
+
+.links {
+  background-color: black;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 3px;
+  box-sizing: content-box;
+  color: white;
+  display: inline-block;
+  flex-direction: column;
+  margin-left: 120px;
+  padding: 5px;
 }
