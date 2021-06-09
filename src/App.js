@@ -11,16 +11,16 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <Switch>
-          <div>
-            <h1 className="page-title ">Movie Card Library CRUD</h1>
-            <Route path="/movies/new" component={ NewMovie } />
-            <Route path="/movies/:id" component={ MovieDetails } />
-            <Route path="/movies/:id/edit" component={ EditMovie } />
+        <div>
+          <h1 className="page-title ">Movie Card Library CRUD</h1>
+          <Switch>
             <Route exact path="/" component={ MovieList } />
+            <Route path="/movies/:id/edit" component={ EditMovie } />
+            <Route path="/movies/:id" component={ MovieDetails } />
+            <Route path="/movies/new" component={ NewMovie } />
             <Route path="*" component={ NotFound } />
-          </div>
-        </Switch>
+          </Switch>
+        </div>
       </BrowserRouter>
     );
   }

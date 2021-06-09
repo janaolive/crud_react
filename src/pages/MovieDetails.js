@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
-import movieData from '../services/movieData';
+// import movieData from '../services/movieData';
 import * as movieAPI from '../services/movieAPI';
 
 class MovieDetails extends Component {
@@ -39,7 +39,11 @@ class MovieDetails extends Component {
     }
     return (
       <div data-testid="movie-details">
-        <img className="movie-card-image-detail" alt="Movie Cover" src={ `../${imagePath}` } />
+        <img
+          className="movie-card-image-detail"
+          alt="Movie Cover"
+          src={ `../${imagePath}` }
+        />
         <p>{ `Title: ${title}` }</p>
         <p>{ `Subtitle: ${subtitle}` }</p>
         <p>{ `Storyline: ${storyline}` }</p>
