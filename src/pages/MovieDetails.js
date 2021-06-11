@@ -25,15 +25,16 @@ class MovieDetails extends Component {
 
   async movieDetail(id) {
     const detail = await movieAPI.getMovie(id);
-    this.setState({ detailMovie: detail, loading: false});
+    this.setState({ detailMovie: detail, loading: false });
   }
 
   render() {
     const { detailMovie, id } = this.state;
     const { title, storyline, imagePath, genre, rating, subtitle } = detailMovie;
-
-    if (detailMovie.length === 0) return <Loading />;
-
+    
+    if (status === 'loading') {
+      return <Loading />;
+    } 
     return (
       <div data-testid="movie-details">
         <img
