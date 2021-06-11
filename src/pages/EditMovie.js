@@ -50,9 +50,7 @@ class EditMovie extends Component {
     return (
       <div data-testid="edit-movie">
         <MovieForm movie={ detailMovie } onSubmit={ this.handleSubmit } />
-        <button type="submit" className="links">
-          <Link to="/">VOLTAR</Link>
-        </button>
+        <Link to="/">VOLTAR</Link>
       </div>
     );
   }
