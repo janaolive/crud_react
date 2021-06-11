@@ -1,48 +1,45 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Loading from '../components/Loading';
-// import movieData from '../services/movieData';
+import { Loading } from '../components';
+
 import * as movieAPI from '../services/movieAPI';
 
 class MovieDetails extends Component {
-  constructor() {
-    super();
+  constructor({ match }) {
+    super({ match });
 
     this.state = {
-      detailMovie: {},
+      id: match.params.id,
+      detailMovie: [],
       loading: true,
     };
 
     this.movieDetail = this.movieDetail.bind(this);
   }
-
+ 
   componentDidMount() {
-    this.movieDetail();
+    const { id } = this.state
+    this.movieDetail(id);
   }
 
-  async movieDetail() {
-    const { match: { params: { id } } } = this.props;
-    const detail = await movieAPI.getMovie(id);
-    this.setState({ detailMovie: detail, loading: false });
+  async movieDetail(id) {
+       const detail = await movieAPI.getMovie(id);
+    this.setState({ detailMovie: detail });
   }
 
   render() {
-    const { loading } = this.state;
-    const {
-      detailMovie: {
-        id, title, subtitle, storyline, imagePath, genre, rating },
-    } = this.state;
+    const { detailMovie, id } = this.state;
+    const { title, storyline, imagePath, genre, rating, subtitle } = detailMovie;
 
-    if (loading === true) {
-      return <Loading />;
-    }
-    return (
+     if (detailMovie.length === 0) return <Loading />;
+
+     return (
       <div data-testid="movie-details">
         <img
           className="movie-card-image-detail"
           alt="Movie Cover"
-          src={ `../${imagePath}` }
+          src={ `../${ imagePath }` }
         />
         <p>{ `Title: ${title}` }</p>
         <p>{ `Subtitle: ${subtitle}` }</p>
@@ -50,7 +47,7 @@ class MovieDetails extends Component {
         <p>{ `Genre: ${genre}` }</p>
         <p>{ `Rating: ${rating}` }</p>
         <button type="submit" className="links">
-          <Link to={ `/movies/${id}/edit` }>EDITAR</Link>
+          <Link to={ `/movies/${ id }/edit` }>EDITAR</Link>
         </button>
         <button type="submit" className="links">
           <Link to="/">VOLTAR</Link>
@@ -61,19 +58,18 @@ class MovieDetails extends Component {
 }
 
 MovieDetails.propTypes = {
-  detailMovie: PropTypes.shape({
-    id: PropTypes.number,
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    storyline: PropTypes.string,
-    rating: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    imagePath: PropTypes.string,
-  }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
+      id: PropTypes.number.isRequired,
+    }).isRequired,
   }).isRequired,
+  // movie: PropTypes.shape({
+  //   title: PropTypes.string.isRequired,
+  //   subtitle: PropTypes.string.isRequired,
+  //   storyline: PropTypes.string.isRequired,
+  //   genre: PropTypes.string.isRequired,
+  //   rating: PropTypes.number.isRequired,
+  // }).isRequired,
 };
 
 export default MovieDetails;

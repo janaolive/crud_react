@@ -1,43 +1,60 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { MovieForm } from '../components';
-import Loading from '../components/Loading';
+import { Link, Redirect } from 'react-router-dom';
+import { MovieForm, Loading } from '../components';
 import * as movieAPI from '../services/movieAPI';
 
 class EditMovie extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  constructor({ match }) {
+    super({ match });
+      
+    this.state = {
+      id: match.params.id,
+      detailMovie: {
+        title: [],
+        subtitle: [],
+        storyonLine: [],
+        rating: '0',
+      },
+      status: 'loading',
+      shouldRedirect: false,
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.movieDetail = this.movieDetail.bind(this);
   }
 
-  shouldComponentUpdate() {
-    this.movieDetail();
+  componentDidMount() {
+    const { id } = this.state;
+    this.movieDetail(id);
   }
 
   async handleSubmit(updatedMovie) {
     const response = await movieAPI.updateMovie(updatedMovie);
-    this.setState({ movie: response, shouldRedirect: true });
+    this.setState(({ detailMovie: response, shouldRedirect: true }));
   }
 
-  async movieDetail() {
-    const { match: { params: { id } } } = this.props;
+  async movieDetail(id) {
     const detail = await movieAPI.getMovie(id);
-    this.setState({ movie: detail, status: null });
+    this.setState({ detailMovie: detail, status: 'null' });
   }
 
   render() {
-    const { status, shouldRedirect, movie } = this.state;
+    const { status, shouldRedirect, detailMovie } = this.state;
+    
     if (shouldRedirect) {
       return <Redirect to="/" />;
     }
     if (status === 'loading') {
       return <Loading />;
     }
+    
     return (
       <div data-testid="edit-movie">
-        <MovieForm movie={ movie } onSubmit={ this.handleSubmit } />
+        <MovieForm movie={ detailMovie } onSubmit={ this.handleSubmit } />
+          <button type="submit" className="links">
+            <Link to="/">VOLTAR</Link>
+          </button>
       </div>
     );
   }
@@ -46,8 +63,8 @@ class EditMovie extends Component {
 EditMovie.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
-      id: PropTypes.string,
-    }),
+      id: PropTypes.number.isRequired
+    })
   }).isRequired,
 };
 
