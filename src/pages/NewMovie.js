@@ -29,7 +29,7 @@ class NewMovie extends Component {
         <MovieForm onSubmit={ this.handleSubmit } />
       </div>
     );
-  } 
+  }
 }
 
 export default NewMovie;

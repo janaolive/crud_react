@@ -25,7 +25,7 @@ class MovieDetails extends Component {
 
   async movieDetail(id) {
     const detail = await movieAPI.getMovie(id);
-    this.setState({ detailMovie: detail });
+    this.setState({ detailMovie: detail, loading: false});
   }
 
   render() {
@@ -39,7 +39,7 @@ class MovieDetails extends Component {
         <img
           className="movie-card-image-detail"
           alt="Movie Cover"
-          src={`../${ imagePath }`}
+          src={ `../${imagePath}` }
         />
         <p>{ `Title: ${title}` }</p>
         <p>{ `Subtitle: ${subtitle}` }</p>
@@ -47,7 +47,7 @@ class MovieDetails extends Component {
         <p>{ `Genre: ${genre}` }</p>
         <p>{ `Rating: ${rating}` }</p>
         <button type="submit" className="links">
-          <Link to={`/movies/${id}/edit`}>EDITAR</Link>
+          <Link to={ `/movies/${id}/edit` }>EDITAR</Link>
         </button>
         <button type="submit" className="links">
           <Link to="/">VOLTAR</Link>
