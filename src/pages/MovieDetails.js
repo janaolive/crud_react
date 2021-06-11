@@ -28,7 +28,6 @@ class MovieDetails extends Component {
   render() {
     const { detailMovie, id } = this.state;
     const { title, storyline, imagePath, genre, rating, subtitle } = detailMovie;
-    
     if (movie.length === 0) return <Loading />;
     return (
       <div data-testid="movie-details">
