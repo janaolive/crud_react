@@ -16,7 +16,7 @@ class EditMovie extends Component {
         storyonLine: [],
         rating: '0',
       },
-      loading: true,
+      status: 'loading',
       shouldRedirect: false,
     };
 
@@ -36,15 +36,15 @@ class EditMovie extends Component {
 
   async movieDetail(id) {
     const detail = await movieAPI.getMovie(id);
-    this.setState({ detailMovie: detail, loading: false });
+    this.setState({ detailMovie: detail, status: false });
   }
 
   render() {
-    const { loading, shouldRedirect, detailMovie } = this.state;
+    const { status, shouldRedirect, detailMovie } = this.state;
     if (shouldRedirect) {
       return <Redirect to="/" />;
     }
-    if (loading === true) {
+    if (status === 'loading') {
       return <Loading />;
     }
     return (
