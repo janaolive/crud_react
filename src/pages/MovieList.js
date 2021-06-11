@@ -23,7 +23,7 @@ class MovieList extends Component {
 
   async listMovies() {
     const films = await movieAPI.getMovies();
-    this.setState({ movies: films, loading: false  });
+    this.setState({ movies: films, loading: false });
   }
 
   render() {
@@ -32,7 +32,7 @@ class MovieList extends Component {
     if (loading === true) {
       return <Loading />;
     }
-    
+
     return (
       <div data-testid="movie-list">
         <div>

@@ -7,7 +7,7 @@ import * as movieAPI from '../services/movieAPI';
 class EditMovie extends Component {
   constructor({ match }) {
     super({ match });
-      
+
     this.state = {
       id: match.params.id,
       detailMovie: {
@@ -41,20 +41,18 @@ class EditMovie extends Component {
 
   render() {
     const { status, shouldRedirect, detailMovie } = this.state;
-    
     if (shouldRedirect) {
       return <Redirect to="/" />;
     }
     if (status === 'loading') {
       return <Loading />;
     }
-    
     return (
       <div data-testid="edit-movie">
         <MovieForm movie={ detailMovie } onSubmit={ this.handleSubmit } />
-          <button type="submit" className="links">
-            <Link to="/">VOLTAR</Link>
-          </button>
+        <button type="submit" className="links">
+          <Link to="/">VOLTAR</Link>
+        </button>
       </div>
     );
   }

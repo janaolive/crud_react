@@ -17,14 +17,14 @@ class MovieDetails extends Component {
 
     this.movieDetail = this.movieDetail.bind(this);
   }
- 
+
   componentDidMount() {
-    const { id } = this.state
+    const { id } = this.state;
     this.movieDetail(id);
   }
 
   async movieDetail(id) {
-       const detail = await movieAPI.getMovie(id);
+    const detail = await movieAPI.getMovie(id);
     this.setState({ detailMovie: detail });
   }
 
@@ -32,14 +32,14 @@ class MovieDetails extends Component {
     const { detailMovie, id } = this.state;
     const { title, storyline, imagePath, genre, rating, subtitle } = detailMovie;
 
-     if (detailMovie.length === 0) return <Loading />;
+    if (detailMovie.length === 0) return <Loading />;
 
-     return (
+    return (
       <div data-testid="movie-details">
         <img
           className="movie-card-image-detail"
           alt="Movie Cover"
-          src={ `../${ imagePath }` }
+          src={`../${ imagePath }`}
         />
         <p>{ `Title: ${title}` }</p>
         <p>{ `Subtitle: ${subtitle}` }</p>
@@ -47,7 +47,7 @@ class MovieDetails extends Component {
         <p>{ `Genre: ${genre}` }</p>
         <p>{ `Rating: ${rating}` }</p>
         <button type="submit" className="links">
-          <Link to={ `/movies/${ id }/edit` }>EDITAR</Link>
+          <Link to={`/movies/${id}/edit`}>EDITAR</Link>
         </button>
         <button type="submit" className="links">
           <Link to="/">VOLTAR</Link>
