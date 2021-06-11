@@ -24,7 +24,7 @@ class App extends React.Component {
               path="/movies/:id"
               render={ (props) => <MovieDetails { ...props } /> }
             />
-            <Route path="*" component={ NotFound } />
+            <Route path=" * " component={ NotFound } />
           </Switch>
         </div>
       </BrowserRouter>
