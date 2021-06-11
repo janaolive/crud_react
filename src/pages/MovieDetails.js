@@ -12,7 +12,7 @@ class MovieDetails extends Component {
     this.state = {
       id: match.params.id,
       detailMovie: [],
-      loading: true,
+      status = 'loading',
     };
 
     this.movieDetail = this.movieDetail.bind(this);
@@ -25,16 +25,16 @@ class MovieDetails extends Component {
 
   async movieDetail(id) {
     const detail = await movieAPI.getMovie(id);
-    this.setState({ detailMovie: detail, loading: false });
+    this.setState({ detailMovie: detail, status: 'null' });
   }
 
   render() {
-    const { detailMovie, id } = this.state;
+    const { detailMovie, id, status } = this.state;
     const { title, storyline, imagePath, genre, rating, subtitle } = detailMovie;
     
     if (status === 'loading') {
       return <Loading />;
-    } 
+    }
     return (
       <div data-testid="movie-details">
         <img
