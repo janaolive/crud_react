@@ -32,7 +32,7 @@ class MovieDetails extends Component {
     const { detailMovie, id, loading } = this.state;
     const { title, storyline, imagePath, genre, rating, subtitle } = detailMovie;
     
-    if (status === 'loading') {
+    if (loading === true) {
       return <Loading />;
     }
     return (
